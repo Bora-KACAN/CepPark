@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "48453550473",
+    "project_id": "ceppark-4e4bb",
+    "storage_bucket": "ceppark-4e4bb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48453550473:android:93ed8ac0e5e100e9e76158",
+        "android_client_info": {
+          "package_name": "com.example.ceppark"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS5nTs4EeYhZLfbZigZ8-x8Oo92YMQrOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
