@@ -13,12 +13,15 @@ CepPark, sürücülerin buldukları boş park yerlerini harita üzerinde işaret
 
 ## 📱 Ekran Görüntüleri
 
-| 👋 Giriş Ekranı | 🗺️ Ana Harita & Radar | 📍 Park Yeri Detayı |
+### 🔐 1. Giriş ve Kayıt İşlemleri
+| 👋 Giriş Ekranı | 📝 Kayıt Ol Ekranı |
+| :---: | :---: |
+| <img width="364" height="742" alt="Ekran görüntüsü 2025-12-27 141002" src="https://github.com/user-attachments/assets/9761f726-d2cd-4877-92ac-f1eaa93fe5b0" /> | <img width="355" height="750" alt="Ekran görüntüsü 2025-12-27 141233" src="https://github.com/user-attachments/assets/797d156f-d929-4ee5-add7-aef1267973f6" /> |
+
+### 🗺️ 2. Uygulama Kullanımı ve Profil
+| 📍 Ana Harita & Radar | 🅿️ Park Yeri Detayı | 👤 Hesap & Profil |
 | :---: | :---: | :---: |
-| *(<img width="364" height="742" alt="Ekran görüntüsü 2025-12-27 141002" src="https://github.com/user-attachments/assets/a78b73c7-4339-4e62-8a7b-276d79a2b0c1" />
-)* | *(<img width="358" height="773" alt="Ekran görüntüsü 2025-12-27 141037" src="https://github.com/user-attachments/assets/dc3c71c2-de24-48ba-ab28-83c947c76c6d" />
- )* | *(<img width="357" height="756" alt="Ekran görüntüsü 2025-12-27 141056" src="https://github.com/user-attachments/assets/d401577c-3506-40c6-b026-e7366f37a731" />
-)* |
+| <img width="358" height="773" alt="Ekran görüntüsü 2025-12-27 141037" src="https://github.com/user-attachments/assets/063c109c-2e1a-4232-aa11-42b39b5365a1" /> | <img width="357" height="756" alt="Ekran görüntüsü 2025-12-27 141056" src="https://github.com/user-attachments/assets/e5055ca0-e366-4ca9-955d-e596db94821c" /> |  <img width="353" height="769" alt="Ekran görüntüsü 2025-12-27 141200" src="https://github.com/user-attachments/assets/c4ed111e-28d0-462f-a295-06e3bc1f29ab" />|
 
 ---
 
