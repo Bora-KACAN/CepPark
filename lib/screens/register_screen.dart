@@ -13,7 +13,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  final AuthService _authService = AuthService(); // Servisi çağırdık
+  final AuthService _authService = AuthService(); 
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const Text("Hemen ücretsiz bir hesap oluştur", style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 40),
 
-              // Ad Soyad
+              
               TextField(
                 controller: _nameController,
                 decoration: InputDecoration(
@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Email
+              
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
@@ -62,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Şifre
+              
               TextField(
                 controller: _passwordController,
                 obscureText: true,
@@ -74,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 24),
 
-              // KAYIT BUTONU
+              
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -92,7 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       return;
                     }
 
-                    // Servise gönder
+                    
                     String? result = await _authService.register(email, password);
 
                     if (!mounted) return;

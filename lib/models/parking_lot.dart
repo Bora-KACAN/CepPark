@@ -1,12 +1,14 @@
-import 'package:latlong2/latlong.dart'; // Konum için lazım
+import 'package:latlong2/latlong.dart'; 
 
 class ParkingLot {
   final String id;
   final String name;
-  final LatLng location; // Haritadaki yeri
+  final LatLng location; 
   final int capacity;
-  final int currentOccupancy; // Doluluk
-  final double pricePerHour;
+  final int currentOccupancy; 
+  final double pricePerHour;      
+
+  
 
   ParkingLot({
     required this.id,
@@ -17,6 +19,6 @@ class ParkingLot {
     required this.pricePerHour,
   });
 
-  // Boş yer sayısını hesaplayan küçük bir özellik
+  
   int get emptySpaces => capacity - currentOccupancy;
 }

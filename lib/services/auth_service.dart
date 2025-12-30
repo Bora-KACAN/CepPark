@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // KAYIT OLMA
+  
   Future<String?> register(String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
@@ -16,7 +16,7 @@ class AuthService {
     }
   }
 
-  // GİRİŞ YAPMA
+  
   Future<String?> login(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(
@@ -29,7 +29,7 @@ class AuthService {
     }
   }
 
-  // ÇIKIŞ YAPMA
+  
   Future<void> logout() async {
     await _auth.signOut();
   }

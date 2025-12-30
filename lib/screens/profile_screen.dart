@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../services/database_service.dart'; // Dosya yolun farklıysa düzelt
+import '../services/database_service.dart'; 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'login_screen.dart'; // Giriş ekranı dosyasını içe aktar
+import 'login_screen.dart'; 
 
 
 
@@ -20,8 +20,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // --- 1. DEĞİŞKENLER (Veriler burada tutuluyor) ---
-  bool isLoading = true; // Sayfa ilk açıldığında "Yükleniyor" modunda başlasın
+  
+  bool isLoading = true; 
   
   
   String displayName = "İsim Yok";
@@ -39,26 +39,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _getUserData(); 
   }
 
-  // ADIM 2: Verileri veritabanından çeken fonksiyon
-  // Veritabanından verileri çekme fonksiyonu (GÜNCELLENMİŞ HALİ)
+  
  Future<void> _getUserData() async {
-    // 1. Giriş yapan kullanıcıyı al
+    
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
     
-    // 2. E-MAİL ADRESİNİ DİREKT BURADAN AL (Veritabanına sormaya gerek yok)
+    
     setState(() {
       email = user.email ?? "Email Yok"; 
     });
 
-    // 3. Diğer bilgileri (İsim, Plaka vs.) Firestore'dan çek
+    
     String uid = user.uid;
     var docRef = FirebaseFirestore.instance.collection('users').doc(uid);
     var docSnapshot = await docRef.get();
 
     if (mounted) {
       if (docSnapshot.exists) {
-        // --- ESKİ KULLANICIYSA VERİLERİ ÇEK ---
+        
         Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
         setState(() {
           displayName = data['name'] ?? "İsim Yok";
@@ -71,13 +70,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           isLoading = false;
         });
       } else {
-        // --- YENİ KULLANICIYSA PROFİL OLUŞTUR ---
+        
         await docRef.set({
           'name': 'Yeni Kullanıcı',
           'licensePlate': '34 TR 00',
           'phoneNumber': '555...',
           'parkingCount': 0,
-          'email': user.email, // E-postayı veritabanına da kaydedelim
+          'email': user.email, 
         });
         
         setState(() {
@@ -89,25 +88,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  // --- 2. YARDIMCI FONKSİYONLAR (Class'ın içinde, build'in dışında) ---
-  // Telefon numarasını düzenli gösteren yardımcı fonksiyon
+  
   String _formatPhoneNumber(String rawNumber) {
-    // Önce numaranın içindeki boşluk vs varsa temizleyelim, sadece rakam kalsın
+    
     String cleanNumber = rawNumber.replaceAll(RegExp(r'\D'), '');
 
-    // Eğer numara 10 haneli ise (örn: 5550001234)
+    
     if (cleanNumber.length == 10) {
       return "0 ${cleanNumber.substring(0, 3)} ${cleanNumber.substring(3, 6)} ${cleanNumber.substring(6, 8)} ${cleanNumber.substring(8, 10)}";
     }
-    // Eğer numara 11 haneli ve 0 ile başlıyorsa (örn: 05550001234)
+    
     else if (cleanNumber.length == 11 && cleanNumber.startsWith('0')) {
       return "${cleanNumber.substring(0, 1)} ${cleanNumber.substring(1, 4)} ${cleanNumber.substring(4, 7)} ${cleanNumber.substring(7, 9)} ${cleanNumber.substring(9, 11)}";
     }
     
-    // Eğer format tutmuyorsa olduğu gibi göster
+    
     return rawNumber;
   }
-  // Düzenleme penceresini açan fonksiyon
+  
  void _showEditDialog(String title, String currentValue, Function(String) onSave, {bool isNumeric = false}) {
     TextEditingController controller = TextEditingController(text: currentValue);
 
@@ -118,9 +116,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: Text("$title Düzenle"),
           content: TextField(
             controller: controller,
-            // BURASI YENİ: Eğer isNumeric true ise sadece sayı klavyesi açılır
+            
             keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
-            // BURASI YENİ: Sadece rakam girilmesine izin verir
+            
             inputFormatters: isNumeric ? [FilteringTextInputFormatter.digitsOnly] : [],
             decoration: InputDecoration(
               hintText: "Yeni $title giriniz",
@@ -149,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   
 
 
-  // Kart Tasarımı Widget'ı
+  
   Widget buildInfoCard({
     required String title,
     required String value,
@@ -183,11 +181,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // --- 3. EKRAN TASARIMI (Build Metodu) ---
+  
   @override
   Widget build(BuildContext context) {
 
-    // EĞER VERİLER HENÜZ GELMEDİYSE YÜKLENİYOR İKONU GÖSTER
+    
     if (isLoading) {
       return Scaffold(
         backgroundColor: Colors.white,
@@ -207,12 +205,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: SingleChildScrollView( // Ekran küçükse kaydırabilsin diye
+      body: SingleChildScrollView( 
         padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Profil Fotoğrafı (Temsili)
+            
             CircleAvatar(
               radius: 50,
               backgroundColor: Colors.blueAccent,
@@ -220,7 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             SizedBox(height: 15),
 
-            // İsim Bölümü (Düzenlenebilir)
+            
             InkWell(
               borderRadius: BorderRadius.circular(10),
               onTap: () {
@@ -228,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   setState(() {
                     displayName = yeniDeger;
                   });
-                  // FIREBASE GÜNCELLEME KODU:
+                  
                   String uid = FirebaseAuth.instance.currentUser!.uid;
                   await DatabaseService().updateUserData(uid, 'name', yeniDeger);
                 });
@@ -254,7 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             
             SizedBox(height: 30),
 
-            // KARTLARIN OLDUĞU BÖLÜM
+            
             Row(
               children: [
                 Expanded(
@@ -278,7 +276,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: "Toplam Park",
                     value: toplamPark,
                     icon: Icons.history,
-                    onTap: null, // Tıklanmaz
+                    onTap: null, 
                   ),
                 ),
               ],
@@ -291,11 +289,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               value: _formatPhoneNumber(telefon),
               icon: Icons.phone,
               onTap: () {
-                // Sona 'isNumeric: true' ekledik
+                
                 _showEditDialog("Telefon", telefon, (yeniDeger) async {
                   setState(() {
                     telefon = yeniDeger;
-                    // Firebase güncelleme kodu buraya...
+                    
                   });
                   String uid = FirebaseAuth.instance.currentUser!.uid;
                   await DatabaseService().updateUserData(uid, 'phone', yeniDeger);
@@ -305,7 +303,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             SizedBox(height: 40),
             
-            // Çıkış Yap Butonu
+            
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
@@ -317,10 +315,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 onPressed: () async{
-                  // 1. Firebase'den çıkış yap
+                  
                   await FirebaseAuth.instance.signOut();
 
-                  // 2. Login ekranına yönlendir ve arkadaki tüm sayfaları sil (Geri dönemesin)
+                  
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => LoginScreen()), 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../services/auth_service.dart'; // Servis
-import 'register_screen.dart'; // Kayıt Ekranı
-import 'home_screen.dart'; // Ana Sayfa
+import '../services/auth_service.dart'; 
+import 'register_screen.dart'; 
+import 'home_screen.dart'; 
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,11 +11,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // Kutucukları okumak için
+  
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // Servisimizi çağırıyoruz
+  
   final AuthService _authService = AuthService();
 
   @override
@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Text("Devam etmek için giriş yapın", style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 40),
 
-              // E-posta
+              
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Şifre
+              
               TextField(
                 controller: _passwordController,
                 obscureText: true,
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 24),
 
-              // GİRİŞ BUTONU
+              
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -75,18 +75,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       return;
                     }
 
-                    // Servise sor: Giriş yapabilir mi?
+                    
                     String? result = await _authService.login(email, password);
 
                     if (result == "success") {
-                      // Başarılıysa Ana Sayfaya (Home) git
+                      
                       if (!mounted) return;
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => const HomeScreen()),
                       );
                     } else {
-                      // Hata varsa göster
+                      
                       if (!mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Hata: $result")));
                     }
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 20),
 
-              // Kayıt Ol Linki
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

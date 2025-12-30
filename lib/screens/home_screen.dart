@@ -18,30 +18,28 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final DatabaseService _databaseService = DatabaseService();
   
-  // Haritayı kontrol etmek için
   final MapController _mapController = MapController(); 
 
-  // ---> DEĞİŞKENLER (ARTIK HATASIZ) <---
-  LatLng? _initialPosition; // Başlangıç konumu
-  bool _isLoading = true;   // Yükleniyor mu?
+  LatLng? _initialPosition; 
+  bool _isLoading = true;   
 
   @override
   void initState() {
     super.initState();
     _databaseService.cleanUpOldSpots();
-    _determinePosition(); // Konumu bulmaya başla
+    _determinePosition(); 
   }
 
-  // --- MEVCUT KONUMU BULMA VE AYARLAMA ---
+  
   Future<void> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Varsayılan Konum (Ankara) - Hata olursa burayı kullanacağız
+    
     LatLng defaultAnkara = const LatLng(39.9355, 32.8236);
 
     try {
-      // 1. GPS Açık mı?
+      
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         if (mounted) {
@@ -53,12 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
         return;
       }
 
-      // 2. İzin Kontrolü
+      
       permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          // İzin yoksa Ankara'yı aç
+          
           if (mounted) {
             setState(() {
               _initialPosition = defaultAnkara;
@@ -70,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
 
       if (permission == LocationPermission.deniedForever) {
-        // Kalıcı red varsa Ankara'yı aç
+        
         if (mounted) {
           setState(() {
             _initialPosition = defaultAnkara;
@@ -80,18 +78,18 @@ class _HomeScreenState extends State<HomeScreen> {
         return;
       }
 
-      // 3. Konumu Al
+      
       Position position = await Geolocator.getCurrentPosition();
 
-      // 4. Ekranı Güncelle
+      
       if (mounted) {
         setState(() {
           _initialPosition = LatLng(position.latitude, position.longitude);
-          _isLoading = false; // Yükleme bitti, haritayı göster
+          _isLoading = false; 
         });
       }
     } catch (e) {
-      // Beklenmedik bir hata olursa yine Ankara'yı aç, uygulama çökmesin
+      
       if (mounted) {
         setState(() {
           _initialPosition = defaultAnkara;
@@ -101,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // --- HARİTA AÇMA ---
+ 
   Future<void> _launchMaps(double lat, double lng) async {
     final Uri googleMapsUrl = Uri.parse("google.navigation:q=$lat,$lng&mode=d");
     if (await canLaunchUrl(googleMapsUrl)) {
@@ -111,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // --- BOŞ YER BİLDİR ---
+  
   Future<void> _reportEmptySpot() async {
     LatLng center = _mapController.camera.center;
     await _databaseService.addEmptySpot(center.latitude, center.longitude);
@@ -126,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // --- DETAY PENCERESİ ---
+  
   void _showLiveSpotDetails(BuildContext context, String docId, double lat, double lng) {
     showModalBottomSheet(
       context: context,
@@ -279,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
-      // --- GÖVDE (YÜKLENİYORSA BEKLE, BİTTİYSE HARİTA) ---
+      
       body: _isLoading
           ? const Center(
               child: Column(
@@ -294,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
           : FlutterMap(
               mapController: _mapController,
               options: MapOptions(
-                initialCenter: _initialPosition!, // Artık garanti dolu
+                initialCenter: _initialPosition!, 
                 initialZoom: 15.0,
               ),
               children: [
