@@ -8,6 +8,15 @@ CepPark, sürücülerin buldukları boş park yerlerini harita üzerinde işaret
 
 ---
 
+## 🎯 Projenin Amacı
+
+Günümüzde büyük şehirlerin en büyük sorunlarından biri olan **park yeri bulma problemini**, topluluk tabanlı (crowdsourced) bir yaklaşımla çözmeyi hedefliyoruz. 
+
+**CepPark**, sadece boş yerleri gösteren bir harita değil, sürücüler arasında **gerçek zamanlı bir yardımlaşma ağıdır**. Sistemimiz şu temel prensiplere dayanır:
+1.  **Zaman Tasarrufu:** Sürücülerin park yeri ararken harcadığı yakıt ve zaman israfını en aza indirmek.
+2.  **Canlı Veri Akışı:** Statik veriler yerine, kullanıcıların anlık bildirimleriyle beslenen dinamik bir harita sunmak.
+3.  **Sürdürülebilirlik:** Bir sürücü park yerinden ayrılırken (Check-out), o yeri arayan diğer sürücüye (Check-in) devrederek sürekli bir döngü oluşturmak.
+
 ## 📱 Ekran Görüntüleri
 
 ### 🔐 1. Giriş ve Kayıt İşlemleri
